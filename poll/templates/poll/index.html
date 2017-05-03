@@ -1,0 +1,37 @@
+{% extends 'poll/base_site.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="top">
+        <div class="col-md-4">
+            <div style = "margin-top: 10%"class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Questions</h3>
+                </div>
+                
+                {% if latest_question_list %}
+                <div class="panel-body">
+                    
+                    <ul class="list-group">
+                    {% for question in latest_question_list %}
+                    
+                        <li class="list-group-item">
+                            <a href="{% url 'poll:detail' question.id %}">{{ question.question_text }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No polls are available.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+{% endblock content %}

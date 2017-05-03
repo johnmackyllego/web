@@ -1,0 +1,38 @@
+{% load staticfiles %}
+<!--
+	<link rel="stylesheet" type="text/css" href="{% static 'poll/style.css' %}" />
+-->
+    <link rel="stylesheet" type="text/css" href="{% static 'poll/bootstrap.min.css' %}" />	
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="top">
+        <div class="col-md-4">
+            <div style = "margin-top: 10%" class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ question.question_text }}</h3>
+                </div>
+                
+                <div class="panel-body">
+                    
+                    <ul class="list-group">
+                    {% for choice in question.choice_set.all %}
+                    
+                        <li class="list-group-item">
+                            {{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <a href="{% url 'poll:detail' question.id %}">Vote again?</a>
+        </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+

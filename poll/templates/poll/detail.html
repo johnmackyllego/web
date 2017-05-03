@@ -1,0 +1,31 @@
+{% extends 'poll/base_site.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="top">
+        <div class="col-md-4">
+            <div style = "margin-top: 10%" class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ question.question_text }}</h3>
+                    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                </div>
+                    <form class ="container" action="{% url 'poll:vote' question.id %}" method="post">
+                        {% csrf_token %}
+                        {% for choice in question.choice_set.all %}
+                            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+                            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+                        {% endfor %}
+                        
+                    <input class="btn btn-primary btn-sm" type="submit"value="Vote"/>
+                    </form>
+                </div>
+            </div>
+            </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+{% endblock content %}
